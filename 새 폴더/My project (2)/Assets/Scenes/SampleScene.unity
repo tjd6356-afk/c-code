@@ -119,6 +119,59 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &44247852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 44247853}
+  - component: {fileID: 44247854}
+  m_Layer: 0
+  m_Name: CardGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &44247853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44247852}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 480.17734, y: 165.03899, z: -6.755214}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &44247854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44247852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca08863f8e2c9144bbc42a746c469e59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card:
+  - {fileID: 368463188}
+  - {fileID: 71287052}
+  - {fileID: 1472989766}
+  - {fileID: 223007769}
+  - {fileID: 827706932}
+  - {fileID: 1399929687}
+  - {fileID: 907204519}
+  - {fileID: 780867217}
 --- !u!1 &63448111
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +207,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &63448113
 MonoBehaviour:
@@ -367,7 +420,9 @@ MonoBehaviour:
   text: {fileID: 1594774684}
   cardNumber: 0
   RotationSpeed: 3
-  isClick: 0
+  isFront: 1
+  isMatched: 0
+  cardGame: {fileID: 44247854}
 --- !u!114 &71287053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,7 +572,9 @@ MonoBehaviour:
   text: {fileID: 1463545408}
   cardNumber: 0
   RotationSpeed: 3
-  isClick: 0
+  isFront: 1
+  isMatched: 0
+  cardGame: {fileID: 44247854}
 --- !u!114 &223007770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,7 +648,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &291144779
 MonoBehaviour:
@@ -786,7 +843,9 @@ MonoBehaviour:
   text: {fileID: 2108100613}
   cardNumber: 0
   RotationSpeed: 3
-  isClick: 0
+  isFront: 1
+  isMatched: 0
+  cardGame: {fileID: 44247854}
 --- !u!114 &368463189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1099,7 +1158,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &632845837
 MonoBehaviour:
@@ -1312,7 +1371,9 @@ MonoBehaviour:
   text: {fileID: 1661863669}
   cardNumber: 0
   RotationSpeed: 3
-  isClick: 0
+  isFront: 1
+  isMatched: 0
+  cardGame: {fileID: 44247854}
 --- !u!114 &780867218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1462,7 +1523,9 @@ MonoBehaviour:
   text: {fileID: 291144779}
   cardNumber: 0
   RotationSpeed: 3
-  isClick: 0
+  isFront: 1
+  isMatched: 0
+  cardGame: {fileID: 44247854}
 --- !u!114 &827706933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1612,7 +1675,9 @@ MonoBehaviour:
   text: {fileID: 63448113}
   cardNumber: 0
   RotationSpeed: 3
-  isClick: 0
+  isFront: 1
+  isMatched: 0
+  cardGame: {fileID: 44247854}
 --- !u!114 &907204520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1798,10 +1863,10 @@ Canvas:
   m_GameObject: {fileID: 1155616600}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -1874,7 +1939,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1215787324
 MonoBehaviour:
@@ -2087,7 +2152,9 @@ MonoBehaviour:
   text: {fileID: 632845837}
   cardNumber: 0
   RotationSpeed: 3
-  isClick: 0
+  isFront: 1
+  isMatched: 0
+  cardGame: {fileID: 44247854}
 --- !u!114 &1399929688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2161,7 +2228,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1463545408
 MonoBehaviour:
@@ -2374,7 +2441,9 @@ MonoBehaviour:
   text: {fileID: 1215787324}
   cardNumber: 0
   RotationSpeed: 3
-  isClick: 0
+  isFront: 1
+  isMatched: 0
+  cardGame: {fileID: 44247854}
 --- !u!114 &1472989767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2448,7 +2517,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1594774684
 MonoBehaviour:
@@ -2585,7 +2654,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1661863669
 MonoBehaviour:
@@ -2753,7 +2822,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2108100613
 MonoBehaviour:
@@ -2864,3 +2933,4 @@ SceneRoots:
   - {fileID: 1817018918}
   - {fileID: 1155616604}
   - {fileID: 1057115269}
+  - {fileID: 44247853}
