@@ -5,8 +5,10 @@ using UnityEngine;
 public class CardGame : MonoBehaviour
 {
     public List<Card> card;
+    public List<Sprite> sprites;
     private Card firstCard = null;
     private Card secondCard = null;
+    private bool isChecking = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,12 +46,15 @@ public class CardGame : MonoBehaviour
         for(int i = 0; i < card.Count; ++i)
         {
             card[i].SetCardNumber(randomPairNumbers[i]);
+            card[i].SetImage(sprites[randomPairNumbers[i]]);
             card[i].isFront = false;
         }
     }
 
     private void CheckCard()
     {
+        isChecking = true;
+
         if(firstCard.cardNumber == secondCard.cardNumber)
         {
             firstCard.isMatched = true;
@@ -60,6 +65,8 @@ public class CardGame : MonoBehaviour
 
             firstCard = null;
             secondCard = null;
+
+            isChecking = false;
         }
         else
         {
@@ -72,20 +79,32 @@ public class CardGame : MonoBehaviour
         firstCard.isFront = false;
         secondCard.isFront = false;
 
+        firstCard.Flip(false);
+        secondCard.Flip(false);
+
         firstCard = null;
         secondCard = null;
+
+        isChecking = false;
     }
 
     public void OnClickCard(Card card)
     {
+        if(isChecking)
+        {
+            return;
+        }
+
         if (firstCard == null)
         {
             firstCard = card;
+            firstCard.Flip(true);
         }
 
-        else
+        else if(firstCard != card)
         {
             secondCard = card;
+            secondCard.Flip(true);
         }
 
         if (firstCard != null && secondCard != null)

@@ -37,8 +37,12 @@ public class Card : MonoBehaviour
         if(!isMatched)
         {
             cardGame.OnClickCard(this);
-            isFront = !isFront;
         }
+    }
+
+    public void Flip(bool isFront)
+    {
+        this.isFront = isFront;
     }
 
     public void SetCardNumber(int newNumber)
@@ -50,5 +54,10 @@ public class Card : MonoBehaviour
     public void ChangeColor(Color newColor)
     {
         GetComponent<Image>().color = newColor;
+    }
+
+    public void SetImage(Sprite sprite)
+    {
+        GetComponent<Image>().sprite = sprite;
     }
 }
