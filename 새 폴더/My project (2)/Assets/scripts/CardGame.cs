@@ -7,7 +7,7 @@ public class CardGame : MonoBehaviour
 {
     [Header("Settings")]
     public GameObject cardPrefab;    // 카드 프리팹
-    public Transform cardParent;     // 카드가 생성될 부모 객체 (Grid Layout Group 권장)
+    public Transform cardParent;     // 카드가 생성될 부모 객체
     public int totalCardCount = 12;  // 생성할 카드 총 개수 (2~20 사이)
 
     public List<Card> card = new List<Card>(); // 생성된 카드들을 담을 리스트
