@@ -79,6 +79,8 @@ public class CardGame : MonoBehaviour
 
     private void StartGame()
     {
+        SoundManager.instance.PlayBGMSound();
+
         List<int> randomPairNumbers = GeneratePairNumbers(card.Count);
 
         for(int i = 0; i < card.Count; ++i)
@@ -141,12 +143,14 @@ public class CardGame : MonoBehaviour
         {
             firstCard = card;
             firstCard.Flip(true);
+            SoundManager.instance.PlaySound();
         }
 
         else if(firstCard != card)
         {
             secondCard = card;
             secondCard.Flip(true);
+            SoundManager.instance.PlaySound();
         }
 
         if (firstCard != null && secondCard != null)
