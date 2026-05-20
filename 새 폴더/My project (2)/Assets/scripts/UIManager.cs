@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("UI Panels")]
+    public GameObject settingPanel;
+
     // [기존 코드] 타이틀 -> 로비 이동
     public void GameStartButtonAction()
     {
@@ -32,4 +35,22 @@ public class UIManager : MonoBehaviour
             Debug.LogWarning("이동할 레벨(씬)의 이름이 비어있습니다! 버튼의 인자값을 확인하세요.");
         }
     }
+
+    public void OpenSettingWindow()
+    {
+        if (settingPanel != null)
+        {
+            settingPanel.SetActive(true); // 세팅 창을 화면에 보이게 켭니다.
+        }
+    }
+
+    // 2. 창 닫기(X) 버튼에 연결할 함수
+    public void CloseSettingWindow()
+    {
+        if (settingPanel != null)
+        {
+            settingPanel.SetActive(false); // 세팅 창을 화면에서 안 보이게 끕니다.
+        }
+    }
+
 }

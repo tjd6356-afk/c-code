@@ -1,34 +1,34 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
     [Header("Audio Clips")]
-    public AudioClip audioClip;    // Ä«µå Å¬¸¯ È¿°úÀ½
-    public AudioClip audioBGMClip; // ¹è°æÀ½¾Ç
+    public AudioClip audioClip;    // ì¹´ë“œ í´ë¦­ íš¨ê³¼ìŒ
+    public AudioClip audioBGMClip; // ë°°ê²½ìŒì•…
 
     private AudioSource audioSource;
     private AudioSource audioSourceBGM;
 
-    // 1. Awake´Â Startº¸´Ù ¸ÕÀú È£ÃâµË´Ï´Ù.
+    // 1. AwakeëŠ” Startë³´ë‹¤ ë¨¼ì € í˜¸ì¶œë©ë‹ˆë‹¤.
     void Awake()
     {
-        // ½Ì±ÛÅæ ¼³Á¤: ÀÎ½ºÅÏ½º°¡ ¾øÀ¸¸é ³ª¸¦ ÇÒ´ç
+        // ì‹±ê¸€í†¤ ì„¤ì •: ì¸ìŠ¤í„´ìŠ¤ê°€ ì—†ìœ¼ë©´ ë‚˜ë¥¼ í• ë‹¹
         if (instance == null)
         {
             instance = this;
-            // ¾ÀÀÌ ¹Ù²î¾îµµ ¹è°æÀ½¾ÇÀÌ ²÷±âÁö ¾Ê°Ô À¯ÁöÇÏ°í ½Í´Ù¸é ¾Æ·¡ ÁÖ¼®À» Çª¼¼¿ä
+            // ì”¬ì´ ë°”ë€Œì–´ë„ ë°°ê²½ìŒì•…ì´ ëŠê¸°ì§€ ì•Šê²Œ ìœ ì§€í•˜ê³  ì‹¶ë‹¤ë©´ ì•„ë˜ ì£¼ì„ì„ í‘¸ì„¸ìš”
             // DontDestroyOnLoad(gameObject); 
         }
         else
         {
-            // ÀÌ¹Ì ÀÎ½ºÅÏ½º°¡ ÀÖ´Ù¸é Áßº¹ »ı¼ºµÈ °ÍÀÌ¹Ç·Î ÆÄ±«
+            // ì´ë¯¸ ì¸ìŠ¤í„´ìŠ¤ê°€ ìˆë‹¤ë©´ ì¤‘ë³µ ìƒì„±ëœ ê²ƒì´ë¯€ë¡œ íŒŒê´´
             Destroy(gameObject);
             return;
         }
 
-        // AudioSource ÃÊ±âÈ­ (Awake¿¡¼­ ¹Ì¸® ¸¸µé¾îµÎ´Â °Ô ¾ÈÀüÇÕ´Ï´Ù)
+        // AudioSource ì´ˆê¸°í™” (Awakeì—ì„œ ë¯¸ë¦¬ ë§Œë“¤ì–´ë‘ëŠ” ê²Œ ì•ˆì „í•©ë‹ˆë‹¤)
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSourceBGM = gameObject.AddComponent<AudioSource>();
     }
@@ -51,7 +51,28 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("BGM Å¬¸³ÀÌ ºñ¾îÀÖ½À´Ï´Ù!");
+            Debug.LogWarning("BGM í´ë¦½ì´ ë¹„ì–´ìˆìŠµë‹ˆë‹¤!");
         }
     }
+
+    public void SetBGMVolume(float volume)
+    {
+        if (audioSourceBGM != null)
+        {
+            audioSourceBGM.volume = volume;
+            Debug.Log($"[SoundManager] ë°°ê²½ìŒ ë³¼ë¥¨ ë³€ê²½ ì‹œë„ -> {volume}");
+        }
+    }
+
+    
+    public void FxVolume(float volume)
+    {
+        if (audioSource != null)
+        {
+            audioSource.volume = volume;
+            Debug.Log($"[SoundManager] íš¨ê³¼ìŒ ë³¼ë¥¨ ë³€ê²½ ì‹œë„ -> {volume}");
+        }
+    }
+
+
 }
