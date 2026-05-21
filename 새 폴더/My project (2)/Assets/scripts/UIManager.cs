@@ -7,7 +7,11 @@ public class UIManager : MonoBehaviour
 {
     [Header("UI Panels")]
     public GameObject settingPanel;
-    public GameObject savePanel;
+    public GameObject rankPanel;
+
+    [Header("Title Rank Settings")]
+    // ⭐ [새로 추가] 최고점수 패널 안에 배치한 레벨별 점수 텍스트 배열 (0번칸 = 1레벨 점수)
+    public TextMeshProUGUI[] titleScoreTexts;
 
     [Header("Lobby Level Settings")]
     // ⭐ 로비의 레벨 선택 버튼들을 순서대로 드래그해서 넣는 배열 (0번칸 = 1스테이지 버튼)
@@ -86,6 +90,11 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("loby");
     }
 
+    public void GameLoadSceneButtonAction()
+    {
+        SceneManager.LoadScene("tile");
+    }
+
     // [기존 코드] 게임 종료
     public void GameQuitButtonAction()
     {
@@ -129,18 +138,36 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("title");
     }
 
-    public void OpenSavePanel()
+    public void OpenRankPanel()
     {
-        if (savePanel != null)
+        if (rankPanel != null)
         {
-            savePanel.SetActive(true);
+            rankPanel.SetActive(true);
+
+            for (int i = 0; i < titleScoreTexts.Length; i++)
+            {
+                int levelNum = i + 1; // 레벨은 1부터 시작
+                int savedScore = PlayerPrefs.GetInt($"LevelScore_{levelNum}", 0);
+
+                if (titleScoreTexts[i] != null)
+                {
+                    if (savedScore > 0)
+                    {
+                        titleScoreTexts[i].text = $"레벨 {levelNum} : {savedScore}점";
+                    }
+                    else
+                    {
+                        titleScoreTexts[i].text = $"레벨 {levelNum} : 미클리어";
+                    }
+                }
+            }
         }
     }
-    public void CloseSavePanel()
+    public void CloseRankPanel()
     {
-        if (savePanel != null)
+        if (rankPanel != null)
         {
-            savePanel.SetActive(false);
+            rankPanel.SetActive(false);
         }
     }
 

@@ -166,6 +166,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 6326779250503669130, guid: 6b14e95810a99f3429d724d14961cb68, type: 3}
   cardParent: {fileID: 788463142}
   totalCardCount: 20
+  currentLevelNumber: 3
   card:
   - {fileID: 0}
   - {fileID: 0}
