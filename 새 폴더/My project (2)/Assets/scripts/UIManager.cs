@@ -52,6 +52,7 @@ public class UIManager : MonoBehaviour
             if (scoreTexts != null && i < scoreTexts.Length && scoreTexts[i] != null)
             {
                 int score = PlayerPrefs.GetInt($"LevelScore_{levelNum}", 0);
+                Debug.Log(levelNum + " / " + score);
                 if (score > 0)
                 {
                     scoreTexts[i].text = $"Score: {score}";
