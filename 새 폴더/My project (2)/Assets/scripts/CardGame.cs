@@ -13,16 +13,21 @@ public class CardGame : MonoBehaviour
     [Header("Level Info")]
     public int currentLevelNumber = 1; // ⭐ 현재 레벨 번호 (인펙터에서 1, 2, 3 등으로 지정)
 
+[Header("Timer Connection")]
+    public TimerManager timerManager; // ⭐ 인스펙터에서 TimerManager를 연결하는 칸
+    public float levelLimitTime = 60f; // ⭐ 이 레벨의 제한 시간 설정
+
     public List<Card> card = new List<Card>();
     public List<Sprite> sprites;
 
     private Card firstCard = null;
     private Card secondCard = null;
     private bool isChecking = false;
+    private bool isGameOver = false; // ⭐ 게임 오버 상태 체크 변수
 
     // ⭐ 게임 클리어 체크를 위한 변수들
     private int matchedPairs = 0;
-    private float levelTimer = 0f; // 점수 계산용 타이머
+    
 
     void Start()
     {
@@ -30,10 +35,7 @@ public class CardGame : MonoBehaviour
     }
 
     // ⭐ 매 프레임 타이머 가동 (점수 산출용)
-    void Update()
-    {
-        levelTimer += Time.deltaTime;
-    }
+    
 
     public void SetupBoard(int count)
     {
@@ -49,7 +51,7 @@ public class CardGame : MonoBehaviour
 
         totalCardCount = count;
         matchedPairs = 0; // 초기화
-        levelTimer = 0f;  // 초기화
+        isGameOver = false; // 초기화
 
         for (int i = 0; i < totalCardCount; i++)
         {
@@ -98,6 +100,12 @@ public class CardGame : MonoBehaviour
             }
             card[i].isFront = false;
         }
+
+        // ⭐ [추가] 게임판 세팅이 끝나면 타이머를 작동시킵니다.
+        if (timerManager != null)
+        {
+            timerManager.StartTimer(levelLimitTime, this);
+        }
     }
 
     private void CheckCard()
@@ -143,7 +151,8 @@ public class CardGame : MonoBehaviour
 
     public void OnClickCard(Card card)
     {
-        if (isChecking) return;
+// ⭐ 시간이 끝났거나 검사 중이면 터치 불가
+        if(isChecking || isGameOver) return;
 
         if (firstCard == null)
         {
@@ -169,9 +178,15 @@ public class CardGame : MonoBehaviour
     {
         Debug.Log($"레벨 {currentLevelNumber} 클리어!");
 
-        // 1. 점수 계산 (빨리 깰수록 높은 점수, 최소 100점 보장)
-        int score = Mathf.Max(100, 5000 - Mathf.RoundToInt(levelTimer * 10));
-
+        // ⭐ 1. 성공했으니 타이머를 먼저 멈춥니다.
+        if (timerManager != null)
+        {
+            timerManager.StopTimer();
+        }
+        // ⭐ 2. 점수 계산 메커니즘 변경: 남은 시간이 많을수록 고득점!
+        float remainingTime = (timerManager != null) ? timerManager.GetRemainingTime() : 0f;
+        int score = Mathf.Max(100, Mathf.RoundToInt(remainingTime * 100)); // 남은 시간 1초당 100점
+        
         // 기존 최고 점수보다 높을 때만 갱신하여 저장
         int oldScore = PlayerPrefs.GetInt($"LevelScore_{currentLevelNumber}", 0);
         if (score > oldScore)
@@ -191,6 +206,27 @@ public class CardGame : MonoBehaviour
         PlayerPrefs.Save();
 
         // 3초 뒤에 로비 씬으로 복귀 (UIManager의 기능 활용)
+        Invoke("GoToLobby", 2.0f);
+    }
+
+    // ⭐ [새로 추가된 함수] 시간이 0이 되면 TimerManager가 나를 원격 호출함
+    public void OnGameOver()
+    {
+        if (isGameOver) return;
+        isGameOver = true;
+        
+        Debug.Log("💥 게임 오버! 로비로 돌아갑니다.");
+
+        // 모든 카드를 다시 뒷면으로 flip 해주는 연출을 넣어도 좋습니다.
+        foreach (Card c in card)
+        {
+            if (c != null && !c.isMatched)
+            {
+                c.Flip(false);
+            }
+        }
+
+        // 실패했으니 2초 뒤 짤막하게 로비로 쫓겨납니다.
         Invoke("GoToLobby", 2.0f);
     }
 
