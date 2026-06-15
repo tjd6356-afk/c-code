@@ -1,11 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
+    public GameObject clearText; // "게임 클리어" 텍스트 오브젝트
+
+    private void Start()
+    {
+        clearText.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        GameController.instance.ClearGame();
+        if (other.CompareTag("Player"))
+        {
+            clearText.SetActive(true);
+        }
     }
 }
